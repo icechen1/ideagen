@@ -1,4 +1,4 @@
-var path = require('path')
+var path = require('path');
 
 module.exports = {
   entry: {
@@ -34,6 +34,10 @@ module.exports = {
         loader: 'json'
       },
       {
+        test: /\.txt$/,
+        loader: 'raw'
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'url',
         query: {
@@ -45,7 +49,8 @@ module.exports = {
   },
   vue: {
     loaders: {
-      js: 'babel!eslint'
+      js: 'babel!eslint',
+      scss: 'style!css!sass'
     }
   },
   eslint: {
