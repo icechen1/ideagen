@@ -1,8 +1,15 @@
 <template>
   <div id="app" class="app">
-    <h1>Hello. What are you trying to brainstorm today?</h1>
-    <input type="text" class="app__theme" placeholder="enter a problem statement" v-model="problem" />
-    <random-word v-if="show" transition="expand"></random-word> <!-- use random color for card -->
+    <div class="app__panel app__panel--left">
+      <div class="controls">
+        <h1>Hello. What are you trying to brainstorm today?</h1>
+        <input type="text" class="controls__theme-box" placeholder="enter a problem statement" v-model="problem" />
+        <random-word v-if="show" transition="expand"></random-word> <!-- use random color for card -->
+      </div>
+    </div>
+    <div class="app__panel app__panel--right app__panel--added-in" v-if="notepad">
+      Test
+    </div>
   </div>
 </template>
 
@@ -21,7 +28,8 @@ export default {
 
   data () {
     return {
-      problem: undefined
+      problem: undefined,
+      notepad: false
     }
   }
 }
@@ -29,6 +37,7 @@ export default {
 
 <style lang="sass">
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import './scss/font-awesome.scss';
 
 $white: #fff;
 $black: #000;
@@ -45,14 +54,51 @@ body {
 
 .app {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   width:100%;
+  height: 100%;
   transition: flex-grow 1000ms linear;
   
-  &__theme {
-    width: 500px;
+  &__panel {
+      height: 100%;
+      flex: 1;
+      overflow: hidden;
+      transition: all 500ms linear;
+      
+      &--left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width:100%;
+        height: 100%;
+      }
+      
+      &--right {
+        background: rgba(0, 0, 0, .6);
+      }
+      
+      &--added-in {
+        flex: .00001;
+        animation: flexGrow 500ms ease forwards;
+      }
+      
+      &--removed {
+        flex: 1;
+        animation: flexShrink 500ms ease forwards;
+      }
+  }
+}
+
+.controls{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__theme-box {
+    width: 40vw;
+    min-width: 500px;
     background: transparentize($black, 0.8);
     color: $white;
     padding: 15px 0 15px 12px;
@@ -67,7 +113,6 @@ body {
     }
   }
 }
-
 /** Animations used by Vue **/
 /* always present */
 .expand-transition {
@@ -80,5 +125,18 @@ body {
   height: 0;
   padding: 0 10px;
   opacity: 0;
+}
+
+@keyframes flexGrow {
+  to {
+    flex: 1;
+  }
+}
+
+@keyframes flexShrink {
+  to {
+    flex: .01;
+    flex: .00001;
+  }
 }
 </style>

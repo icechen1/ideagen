@@ -1,7 +1,7 @@
 <template>
   <div class="random-word">
     <span class="random-word__word">{{ word }}</span>
-    <button class="random-word__new fa fa-refresh" v-on:click="chooseNewWord">New</button>
+    <button v-on:click="chooseNewWord">New</button>
   </div>
 </template>
 
@@ -38,28 +38,10 @@ export default {
 
 <style lang="sass" scoped>
 .random-word {
-    align-self: center;
-    width:500px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  
-   &__word {
-     font-size: 4em;
-   }
+   align-self: center;
    
-   &__new {
-      height:100%;
-      background: none;
-      color: green;
-      padding: 15px 0 15px 12px;
-      border: none;
-      transition: all .3s ease-in-out;
-      font-size: 24px;
-      outline: none;
-      text-align: center;
-      align-self: flex-end;
+   &__word{
+     font-size: 4em;
    }
 }
 </style>
