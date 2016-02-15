@@ -1,12 +1,16 @@
 <template>
   <div id="app" class="app">
-    <div class="app__panel app__panel--left">
-      <controls></controls>
-      <div class="app__panel__footer">
-        <a href="https://medium.com/@accannis/generating-ideas-at-apple-71e575a1e2e3#.q2h6072jo" target="_blank">What is this?</a>
+    <div class="app__panel app__panel--left left_panel">
+      <div class="left_panel__col_1">
+        <controls class="left_panel__col_1__controls"></controls>
+        <div class="left_panel__col_1__footer">
+          <a href="https://medium.com/@accannis/generating-ideas-at-apple-71e575a1e2e3#.q2h6072jo" target="_blank">What is this?</a>
+        </div>
       </div>
-      <div class="toggle_notepad" v-on:click="toggleNotepad()">
-        <i class="fa fa-pencil-square-o"></i>
+      <div class="left_panel__col_2">
+        <div class="toggle_notepad" v-on:click="toggleNotepad()">
+          <i class="fa fa-pencil-square-o"></i>
+        </div>
       </div>
     </div>
     <div class="app__panel app__panel--right app__panel--{{notepadStyle}}" v-show="notepad" transition="expand" contenteditable="true">
@@ -52,8 +56,6 @@ $black: #000;
 
 body {
   font-family: 'Open Sans', sans-serif;
-  display: flex;
-  align-items: center;
   height: 100vh;
   width: 100vw;
   padding:0;
@@ -63,9 +65,8 @@ body {
 .app {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
-  width:100%;
+  width: 100%;
   height: 100%;
   transition: flex-grow 1000ms linear;
   
@@ -74,19 +75,12 @@ body {
       flex: 1;
       overflow: hidden;
       transition: all 500ms linear;
-        
-      &__footer {
-         position: absolute;
-         bottom: 0;
-         text-align: center;
-         width:100%;
-      }
-      
+       
       &--left {
         display: flex;
         align-items: center;
-        justify-content: center;
-        flex-direction: column;
+        justify-content: space-between;
+        flex-direction: row;
         width: 100%;
         height: 100%;
         flex-grow: 1;
@@ -109,11 +103,32 @@ body {
   }
 }
 
+.left_panel {
+  &__col_1 {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+        
+    &__controls {
+    }
+    
+    &__footer {
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+      width:100%;
+    }
+  }
+  
+  &__col_2 {
+  }
+}
+
 .toggle_notepad {
   align-self: flex-end;
   border-radius: 8px 0px 0px 8px;
   padding: 20px 0px 20px 20px;
-  order: -1;
   background: #eee;
   i {
     font-size: 3em;

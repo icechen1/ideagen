@@ -39,7 +39,8 @@ export default {
 <style lang="sass" scoped>
 .random-word {
     align-self: center;
-    width:500px;
+    width: 40%;
+    min-width: 400px;
     display: flex;
     flex-direction: row;
     align-items: center;

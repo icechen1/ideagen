@@ -1,6 +1,6 @@
 <template>
   <div class="controls">
-    <h1>{{ headerMessage }}</h1>
+    <h1 class="controls__title">{{ headerMessage }}</h1>
     <input type="text" class="controls__theme-box" placeholder="enter a problem statement" v-model="problem" />
     <random-word v-if="show" transition="expand"></random-word> <!-- use random color for card -->
   </div>
@@ -43,9 +43,14 @@ $black: #000;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  &__title {
+    text-align: center;
+  }
+  
   &__theme-box {
-    width: 40vw;
-    min-width: 500px;
+    width: 40%;
+    min-width: 400px;
     background: transparentize($black, 0.8);
     color: $white;
     padding: 15px 0 15px 12px;
