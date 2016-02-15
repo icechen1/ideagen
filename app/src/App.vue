@@ -1,34 +1,42 @@
 <template>
   <div id="app" class="app">
     <div class="app__panel app__panel--left">
-      <div class="controls">
-        <h1>Hello. What are you trying to brainstorm today?</h1>
-        <input type="text" class="controls__theme-box" placeholder="enter a problem statement" v-model="problem" />
-        <random-word v-if="show" transition="expand"></random-word> <!-- use random color for card -->
+      <controls></controls>
+      <div class="app__panel__footer">
+        <a href="https://medium.com/@accannis/generating-ideas-at-apple-71e575a1e2e3#.q2h6072jo" target="_blank">What is this?</a>
+      </div>
+      <div class="toggle_notepad" v-on:click="toggleNotepad()">
+        <i class="fa fa-pencil-square-o"></i>
       </div>
     </div>
-    <div class="app__panel app__panel--right app__panel--added-in" v-if="notepad">
-      Test
+    <div class="app__panel app__panel--right app__panel--{{notepadStyle}}" v-show="notepad" transition="expand" contenteditable="true">
+      http://ellisonleao.github.io/sharer.js/
     </div>
   </div>
 </template>
 
 <script>
-import RandomWord from './components/RandomWord'
+import Controls from './components/Controls'
+
 export default {
   components: {
-    RandomWord
+    Controls
+  },
+
+  methods: {
+    toggleNotepad () {
+      this.notepad = !this.notepad
+    }
   },
 
   computed: {
-    show () {
-      return this.problem
+    notepadStyle () {
+      return this.notepad ? 'added-in' : 'removed'
     }
   },
 
   data () {
     return {
-      problem: undefined,
       notepad: false
     }
   }
@@ -66,18 +74,27 @@ body {
       flex: 1;
       overflow: hidden;
       transition: all 500ms linear;
+        
+      &__footer {
+         position: absolute;
+         bottom: 0;
+         text-align: center;
+         width:100%;
+      }
       
       &--left {
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        width:100%;
+        flex-direction: column;
+        width: 100%;
         height: 100%;
+        flex-grow: 1;
       }
       
       &--right {
-        background: rgba(0, 0, 0, .6);
+        background: rgba(0, 0, 0, .05);
+        font-size: 1.5em;
       }
       
       &--added-in {
@@ -86,33 +103,23 @@ body {
       }
       
       &--removed {
-        flex: 1;
+        flex: 2;
         animation: flexShrink 500ms ease forwards;
       }
   }
 }
 
-.controls{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  &__theme-box {
-    width: 40vw;
-    min-width: 500px;
-    background: transparentize($black, 0.8);
-    color: $white;
-    padding: 15px 0 15px 12px;
-    border-radius: 8px;
-    border: none;
-    transition: all .3s ease-in-out;
-    font-size: 24px;
-    outline: none;
-    text-align: center;
-    &::placeholder {
-      color: transparentize($white, 0.5);
-    }
+.toggle_notepad {
+  align-self: flex-end;
+  border-radius: 8px 0px 0px 8px;
+  padding: 20px 0px 20px 20px;
+  order: -1;
+  background: #eee;
+  i {
+    font-size: 3em;
   }
 }
+
 /** Animations used by Vue **/
 /* always present */
 .expand-transition {
@@ -129,7 +136,7 @@ body {
 
 @keyframes flexGrow {
   to {
-    flex: 1;
+    flex: 2;
   }
 }
 
