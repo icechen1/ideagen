@@ -1,7 +1,11 @@
 <template>
-  <div class="random-word">
-    <span class="random-word__word">{{ word }}</span>
-    <button class="random-word__new fa fa-refresh" v-on:click="chooseNewWord">New</button>
+  <div>
+    <h3 class="random-word__hint">Here's a random word</h3>
+    <div class="random-word">
+      <span class="random-word__word">{{ word }}</span>
+      <button class="random-word__new fa fa-refresh" v-on:click="chooseNewWord">New</button>
+    </div>
+     <h3 class="random-word__hint">Can you come up with an idea?</h3>
   </div>
 </template>
 
@@ -37,6 +41,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+
+h3 {
+  text-align: center;
+}
+
 .random-word {
     align-self: center;
     width: 40%;

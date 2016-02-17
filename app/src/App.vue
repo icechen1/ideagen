@@ -13,9 +13,12 @@
         </div>
       </div>
     </div>
-    <div class="app__panel app__panel--right app__panel--{{notepadStyle}}" v-show="notepad" transition="expand" contenteditable="true">
-      http://ellisonleao.github.io/sharer.js/
+    <div class="app__panel app__panel--right app__panel--{{notepadStyle}}" v-show="notepad" transition="expand">
+      <div class="notepad" contenteditable="true">
+        You can write notes here. Nothing is saved however, so remember to back this up!
+      </div>
     </div>
+    <!-- http://ellisonleao.github.io/sharer.js/ -->
   </div>
 </template>
 
@@ -134,6 +137,21 @@ body {
     font-size: 3em;
   }
 }
+
+.notepad {
+  padding: 16px;
+  outline: none;
+  height: 100%;
+}
+/** Mobile **/
+
+@media only screen
+  and (max-device-width: 768px) {
+    .toggle_notepad{
+      display:none;
+    }
+}
+
 
 /** Animations used by Vue **/
 /* always present */
